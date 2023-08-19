@@ -34,9 +34,8 @@ pipeline {
         stage("") {
 
         }
+    }
+    post {
 
-        post {
-
-        }
     }
 }

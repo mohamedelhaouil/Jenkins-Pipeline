@@ -1,4 +1,5 @@
 #!/bin/bash
+#use ubuntu20.04 with at least t2.small instance type
 sudo apt update
 sudo apt install openjdk-11-jdk -y
 sudo apt install maven -y

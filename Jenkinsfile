@@ -83,7 +83,7 @@ pipeline {
                     groupId       : "cicdproject",
                     version       : "${env.BUILD_ID}_${env.BUILD_TIMESTAMP}",
                     repository    : "${RELEASE_REPO}",
-                    credentialsId : "${NEXUsS_LOGIN}",
+                    credentialsId : "${NEXUS_LOGIN}",
                     artifacts: [
                         [
                             artifactId: "java_app",

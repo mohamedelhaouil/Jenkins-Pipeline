@@ -1,3 +1,7 @@
+def COLOR_MAP = [
+    "SUCCESS" : "good", 
+    "FAILURE" : "danger",
+]
 pipeline {
     agent any
 
@@ -77,7 +81,7 @@ pipeline {
                     protocol      : "http",
                     nexusUrl      : "${NEXUS_IP}:${NEXUS_PORT}",
                     groupId       : "cicdproject",
-                    version       : "${env.BUILD_ID}-${env.BUILD_TIMESTAMP}",
+                    version       : "${env.BUILD_ID}_${env.BUILD_TIMESTAMP}",
                     repository    : "${RELEASE_REPO}",
                     credentialsId : "${NEXUS_LOGIN}",
                     artifacts: [
@@ -91,6 +95,6 @@ pipeline {
                 )
             }
         }
-
     }
+    
 }

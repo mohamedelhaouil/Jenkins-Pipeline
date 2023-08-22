@@ -75,7 +75,7 @@ pipeline {
                 nexusArtifactUploader(
                     nexusVersion  : "nexus3",
                     protocol      : "http",
-                    nexusUrl      : "${NEXUS_SIP}:${NEXUS_PORT}",
+                    nexusUrl      : "${NEXUS_IP}:${NEXUS_PORT}",
                     groupId       : "cicdproject",
                     version       : "${env.BUILD_ID}-${env.BUILD_TIMESTAMP}",
                     repository    : "${RELEASE_REPO}",

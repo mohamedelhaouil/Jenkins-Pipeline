@@ -2,15 +2,16 @@
 ### Prerequisites
 - JDK 1.8 or later
 - Maven 3 or later
-- MySQL 5.6 or later
-
-### Technologies 
-- Spring MVC
-- Spring Security
-- Spring Data JPA
+### Technologies
+- AWS
+- Jenkins
+- Nexus
+- Sonarqube
+- Slack
 - Maven
-- JSP
-- MySQL
+- Git && Github
+- 
+<!--
 ### Database
 Here,we used Mysql DB 
 MSQL DB Installation Steps for Linux ubuntu 14.04:
@@ -22,4 +23,5 @@ Then look for the file :
 - accountsdb.sql file is a mysql dump file.we have to import this dump to mysql db server
 - > mysql -u <user_name> -p accounts < accountsdb.sql
 
+-->
 

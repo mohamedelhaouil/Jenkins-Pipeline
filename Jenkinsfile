@@ -83,7 +83,7 @@ pipeline {
                     groupId       : "cicdproject",
                     version       : "${env.BUILD_ID}_${env.BUILD_TIMESTAMP}",
                     repository    : "${RELEASE_REPO}",
-                    credentialsId : "${NEXUS_LOGIN}",
+                    credentialsId : "${NEXUsS_LOGIN}",
                     artifacts: [
                         [
                             artifactId: "java_app",
@@ -100,8 +100,8 @@ pipeline {
         always {
             echo "Slack Notification."
             slackSend channel: "#cicdpipeline",
-                color: COLOR_MAP[currentBuild.currentResult],
-                message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} \n More info at: ${env.BUILD_URL}"
+                      color: COLOR_MAP[currentBuild.currentResult],
+                      message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} \n More info at: ${env.BUILD_URL}"
         }
     }
 }

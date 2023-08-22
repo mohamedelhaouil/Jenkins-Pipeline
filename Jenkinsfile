@@ -9,9 +9,9 @@ pipeline {
     environment {
         NEXUS_IP       = "172.31.63.4"
         NEXUS_PORT     = "8081"
-        NEXUS_LOGIN    = "nexuslogin"
         NEXUS_USER     = "admin"
         NEXUS_PASS     = "NexusInstance"
+        NEXUS_LOGIN    = "nexuslogin"
         NEXUS_GRP_REPO = "vpro-maven-group"
         RELEASE_REPO   = "vprofile-release"
         CENTRAL_REPO   = "vpro-maven-central"

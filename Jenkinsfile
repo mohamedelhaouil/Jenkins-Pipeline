@@ -16,6 +16,8 @@ pipeline {
         RELEASE_REPO   = "vprofile-release"
         CENTRAL_REPO   = "vpro-maven-central"
         SNAP_REPO      = "vprofile-snapshot"
+        SONAR_INSTANCE  = "sonarinstance"
+        SONAR_SCANNER   = "sonarscanner"
     }
 
     stages {

@@ -48,14 +48,16 @@ pipeline {
             }
             steps {
                 withSonarQubeEnv("${SONAR_INSTANCE}") {
-                    sh '''${scanner}/bin/sonar-scanner" -Dsonar.projectKey=cicd-jenkins \
+                    sh '''${scanner}/bin/sonar-scanner \
+                        -Dsonar.projectKey=cicd-jenkins \
                         -Dsonar.projectName=cicd-jenkins \
                         -Dsonar.projectVersion=1.0 \
                         -Dsonar.sources=src \
                         -Dsonar.java.binaries=target/test-classes/com/visualpathit/account/controllerTest/ \
                         -Dsonar.junit.reportsPath=target/surefire-reports/ \
                         -Dsonar.jacoco.reportsPath=target/jacoco.exec \
-                        -Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml'''
+                        -Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml
+                        '''
                 }
             }
         }

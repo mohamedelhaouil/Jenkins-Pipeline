@@ -48,8 +48,7 @@ pipeline {
             }
             steps {
                 withSonarQubeEnv("${SONAR_INSTANCE}") {
-                    sh '''${scanner}/bin/sonar-scanner" \
-                        -Dsonar.projectKey=cicd-jenkins \
+                    sh '''${scanner}/bin/sonar-scanner" -Dsonar.projectKey=cicd-jenkins \
                         -Dsonar.projectName=cicd-jenkins \
                         -Dsonar.projectVersion=1.0 \
                         -Dsonar.sources=src \

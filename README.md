@@ -1,7 +1,9 @@
 # Jenkins-Pipeline
+
 ### Prerequisites
 - JDK 1.8 or later
 - Maven 3 or later
+  
 ### Technologies
 - AWS
 - Jenkins
@@ -10,7 +12,6 @@
 - Slack
 - Maven
 - Git && Github
-- 
 <!--
 ### Database
 Here,we used Mysql DB 

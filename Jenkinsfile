@@ -36,9 +36,14 @@ pipeline {
                 }
             }
         }
-        stage("Test") {
+        stage("Unit Test") {
             steps {
                 sh "mvn test"
+            }
+        }
+        stage("Integration Test"){
+            steps {
+                sh "mvn verify -DskipUnitTests"
             }
         }
         stage("Checkstyle Analysis") {
@@ -68,8 +73,6 @@ pipeline {
         stage("Sonar Quality Gate") {
             steps {
                 timeout(time: 1, unit: 'HOURS') {
-                    // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
-                    // true = set pipeline to UNSTABLE, false = don't
                     waitForQualityGate abortPipeline: true
                 }
             }

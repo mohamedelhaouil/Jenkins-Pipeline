@@ -12,6 +12,9 @@
 - Slack
 - Maven
 - Git && Github
+- Docker
+- Kubernetes
+- Helm
 <!--
 ### Database
 Here,we used Mysql DB 

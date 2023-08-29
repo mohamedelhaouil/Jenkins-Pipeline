@@ -119,7 +119,7 @@ pipeline {
         }
         stage("Remove Docker Image") {
             steps {
-                sh "docker rmi $DOCKERHUB_REPO:V$BUILD_ID "
+                sh "docker rmi $DOCKERHUB_REPO:V$BUILD_ID"
             }
         }
         stage("Kubernetes Deploy") {

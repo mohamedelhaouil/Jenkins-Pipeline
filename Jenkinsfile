@@ -11,17 +11,19 @@ pipeline {
     }
 
     environment {
-        NEXUS_IP       = "172.31.63.4"
-        NEXUS_PORT     = "8081"
-        NEXUS_USER     = "admin"
-        NEXUS_PASS     = "NexusInstance"
-        NEXUS_LOGIN    = "nexuslogin"
-        NEXUS_GRP_REPO = "vpro-maven-group"
-        RELEASE_REPO   = "vprofile-release"
-        CENTRAL_REPO   = "vpro-maven-central"
-        SNAP_REPO      = "vprofile-snapshot"
+        NEXUS_IP        = "172.31.63.4"
+        NEXUS_PORT      = "8081"
+        NEXUS_USER      = "admin"
+        NEXUS_PASS      = "NexusInstance"
+        NEXUS_LOGIN     = "nexuslogin"
+        NEXUS_GRP_REPO  = "vpro-maven-group"
+        RELEASE_REPO    = "vprofile-release"
+        CENTRAL_REPO    = "vpro-maven-central"
+        SNAP_REPO       = "vprofile-snapshot"
         SONAR_INSTANCE  = "sonarinstance"
         SONAR_SCANNER   = "sonarscanner"
+        DOCKERHUB_REPO  = "mohamedelhaouil/vproapp"
+        DOCKERHUB_LOGIN = "dockerhublogin"
     }
 
     stages {
@@ -98,13 +100,41 @@ pipeline {
                 )
             }
         }
+        stage("Build App Image") {
+            steps {
+                script {
+                    dockerImage = docker.build DOCKERHUB_REPO + ":V$BUILD_ID"  
+                }
+            }
+        }
+        stage("Push Image") {
+            steps {
+                script {
+                    docker.withRegistry("", DOCKERHUB_LOGIN) {
+                        dockerImage.push("V$BUILD_ID")
+                        dockerImage.push("latest")
+                    }
+                }
+            }
+        }
+        stage("Remove Docker Image") {
+            steps {
+                sh "docker rmi $DOCKERHUB_REPO:V$BUILD_ID "
+            }
+        }
+        stage("Kubernetes Deploy") {
+            agent {label "KOPS"}
+            steps {
+                sh "helm upgrade --install  --force vprofile-stack helm/vprofilecharts --set appimage=${DOCKERHUB_REPO}:V${BUILD_ID} --namespace prod"
+            }
+        }
     }
     post {
         always {
             echo "Slack Notification."
             slackSend channel: "#cicdpipeline",
                       color: COLOR_MAP[currentBuild.currentResult],
-                      message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} \n More info at: ${env.BUILD_URL}"
+                      message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_ID} \n More info at: ${env.BUILD_URL}"
         }
     }
 }

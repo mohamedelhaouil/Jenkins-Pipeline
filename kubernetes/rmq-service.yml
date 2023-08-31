@@ -9,5 +9,5 @@ spec:
     - port: 15672
       targetPort: vpromq01-port
       protocol: TCP
-  Type: ClusterIP
+  type: ClusterIP
 

@@ -123,7 +123,10 @@ pipeline {
             }
         }
         stage("Kubernetes Deploy") {
-            echo "Success!"
+            steps {
+                echo "Success!"
+            }
+        }
     }
     post {
         always {

@@ -123,8 +123,9 @@ pipeline {
             }
         }
         stage("Kubernetes Deploy") {
+            agent {label "KOPS"}
             steps {
-                echo "Success!"
+                sh "helm upgrade --install  --force vprofile-stack helm/vprofilecharts --set appimage=${DOCKERHUB_REPO}:V${BUILD_ID} --namespace prod"
             }
         }
     }

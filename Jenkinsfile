@@ -11,10 +11,10 @@ pipeline {
     }
 
     environment {
-        NEXUS_IP        = "172.31.63.4"
+        NEXUS_IP        = "172.31.91.215"
         NEXUS_PORT      = "8081"
         NEXUS_USER      = "admin"
-        NEXUS_PASS      = "NexusInstance"
+        NEXUS_PASS      = "nexusinstance"
         NEXUS_LOGIN     = "nexuslogin"
         NEXUS_GRP_REPO  = "vpro-maven-group"
         RELEASE_REPO    = "vprofile-release"
@@ -125,7 +125,8 @@ pipeline {
         stage("Kubernetes Deploy") {
             agent {label "KOPS"}
             steps {
-                sh "helm upgrade --install  --force vprofile-stack helm/vprofilecharts --set appimage=${DOCKERHUB_REPO}:V${BUILD_ID} --namespace prod"
+                // sh "helm upgrade --install  --force vprofile-stack helm/vprofilecharts --set appimage=${DOCKERHUB_REPO}:V${BUILD_ID} --namespace prod"
+                sh "echo 'Deployment' && sleep 30"
             }
         }
     }
